@@ -226,6 +226,48 @@
         }
       }
 
+      /* Audio Control Button */
+      .audio-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(247, 250, 251, 0.1);
+        border: 1px solid rgba(138, 155, 176, 0.3);
+        border-radius: 50%;
+        backdrop-filter: blur(10px);
+        cursor: pointer;
+        transition: all 0.3s;
+        padding: 0;
+      }
+
+      .audio-button:hover {
+        background-color: rgba(247, 250, 251, 0.2);
+        border-color: rgba(138, 155, 176, 0.5);
+      }
+
+      .audio-button svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* Desktop: show after nav links */
+      @media (min-width: 768px) {
+        .audio-button {
+          margin-left: 1rem;
+        }
+      }
+
+      /* Mobile: same size as menu button */
+      @media (max-width: 767px) {
+        .audio-button {
+          width: 40px;
+          height: 40px;
+          margin-right: 0.5rem;
+        }
+      }
+
       /* Mobile Sidebar */
       .mobile-sidebar {
         position: fixed;
@@ -495,6 +537,11 @@
   </head>
 
   <body>
+    <!-- Background Audio -->
+    <audio id="backgroundAudio" loop>
+      <source src="https://cdn.pixabay.com/download/audio/2024/10/12/audio_7dd52a2e33.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- Loading Animation -->
     <div class="loading-screen" id="loadingScreen">
       <div class="wave-loader">
@@ -533,7 +580,25 @@
         <div class="nav-links">
           <a class="nav-link" onclick="showModal()">White Paper</a>
           <a class="nav-link" onclick="showModal()">Careers</a>
+          
+          <!-- Audio Control Button (Desktop) -->
+          <button class="audio-button" onclick="toggleAudio()" id="audioButton" aria-label="Toggle audio">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="audioIcon">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" id="audioWave1"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" id="audioWave2"></path>
+            </svg>
+          </button>
         </div>
+
+        <!-- Audio Control Button (Mobile) -->
+        <button class="audio-button d-md-none" onclick="toggleAudio()" aria-label="Toggle audio">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" class="audio-wave-mobile"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" class="audio-wave-mobile"></path>
+          </svg>
+        </button>
 
         <!-- Mobile Menu Button -->
         <button class="menu-button" onclick="toggleSidebar()">
@@ -608,11 +673,60 @@
     
     <!-- Loading Animation Script -->
     <script>
+      let audioPlaying = false;
+      const audio = document.getElementById('backgroundAudio');
+
       window.addEventListener('load', function() {
         setTimeout(function() {
           document.getElementById('loadingScreen').classList.add('hidden');
+          // Auto-play audio after loading (with user interaction fallback)
+          playAudio();
         }, 2000);
       });
+
+      // Try to auto-play audio
+      function playAudio() {
+        audio.play().then(() => {
+          audioPlaying = true;
+          updateAudioIcon();
+        }).catch((error) => {
+          // Auto-play was prevented, user needs to click the button
+          console.log('Auto-play prevented. User interaction required.');
+          audioPlaying = false;
+          updateAudioIcon();
+        });
+      }
+
+      // Toggle audio playback
+      function toggleAudio() {
+        if (audioPlaying) {
+          audio.pause();
+          audioPlaying = false;
+        } else {
+          audio.play();
+          audioPlaying = true;
+        }
+        updateAudioIcon();
+      }
+
+      // Update audio icon based on playback state
+      function updateAudioIcon() {
+        const wave1 = document.getElementById('audioWave1');
+        const wave2 = document.getElementById('audioWave2');
+        const waveMobile = document.querySelectorAll('.audio-wave-mobile');
+        
+        if (audioPlaying) {
+          // Show sound waves
+          if (wave1) wave1.style.opacity = '1';
+          if (wave2) wave2.style.opacity = '1';
+          waveMobile.forEach(wave => wave.style.opacity = '1');
+        } else {
+          // Hide sound waves (muted state)
+          if (wave1) wave1.style.opacity = '0.3';
+          if (wave2) wave2.style.opacity = '0.3';
+          waveMobile.forEach(wave => wave.style.opacity = '0.3');
+        }
+      }
 
       // Toggle mobile sidebar
       function toggleSidebar() {
