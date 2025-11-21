@@ -224,22 +224,6 @@
         z-index: 1;
       }
 
-      .hero-planet {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 800px;
-        height: 800px;
-        opacity: 0.6;
-        pointer-events: none;
-        background-image: url('./assets/planet.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center right;
-        z-index: 2;
-      }
-
       .hero-content {
         position: relative;
         z-index: 10;
@@ -250,13 +234,13 @@
 
       @media (min-width: 768px) {
         .hero-content {
-          padding: 5rem 2rem;
+          padding: 5rem 1.5rem;
         }
       }
 
       @media (min-width: 992px) {
         .hero-content {
-          padding: 6rem 3rem;
+          padding: 6rem 2rem;
         }
       }
 
@@ -351,13 +335,6 @@
           font-size: 0.875rem;
         }
       }
-
-      /* Responsive - Hide planet on smaller screens */
-      @media (max-width: 991px) {
-        .hero-planet {
-          display: none;
-        }
-      }
     </style>
   </head>
 
@@ -408,9 +385,6 @@
 
       <!-- Dark Overlay -->
       <div class="hero-overlay"></div>
-
-      <!-- Planet Decoration -->
-      <div class="hero-planet d-none d-lg-block"></div>
 
       <!-- Content -->
       <div class="hero-content">
