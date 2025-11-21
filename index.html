@@ -174,6 +174,176 @@
         }
       }
 
+      /* Navigation Links */
+      .nav-links {
+        display: none;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      @media (min-width: 768px) {
+        .nav-links {
+          display: flex;
+        }
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: #ffffff;
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: opacity 0.3s;
+        cursor: pointer;
+      }
+
+      .nav-link:hover {
+        opacity: 0.8;
+      }
+
+      /* Mobile Menu Button */
+      .menu-button {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+      }
+
+      .menu-button span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background-color: #ffffff;
+        transition: all 0.3s;
+      }
+
+      @media (min-width: 768px) {
+        .menu-button {
+          display: none;
+        }
+      }
+
+      /* Mobile Sidebar */
+      .mobile-sidebar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: linear-gradient(135deg, #0a1929 0%, #1a3a52 50%, #0a1929 100%);
+        z-index: 1000;
+        transition: right 0.3s ease;
+        padding: 2rem;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .mobile-sidebar.active {
+        right: 0;
+      }
+
+      .sidebar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .sidebar-title {
+        color: #ffffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+
+      .close-button {
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+      }
+
+      .sidebar-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .sidebar-link {
+        text-decoration: none;
+        color: #ffffff;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.125rem;
+        font-weight: 500;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        transition: opacity 0.3s;
+      }
+
+      .sidebar-link:hover {
+        opacity: 0.8;
+      }
+
+      /* Modal/Popup */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: linear-gradient(135deg, #0a1929 0%, #1a3a52 100%);
+        padding: 2.5rem 3rem;
+        border-radius: 1rem;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .modal-text {
+        color: #ffffff;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .modal-button {
+        background-color: rgba(247, 250, 251, 0.2);
+        color: #ffffff;
+        border: 1px solid rgba(138, 155, 176, 0.3);
+        padding: 0.75rem 2rem;
+        border-radius: 50rem;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .modal-button:hover {
+        background-color: rgba(247, 250, 251, 0.3);
+        border-color: rgba(138, 155, 176, 0.5);
+      }
+
       /* Hero Styles */
       .hero-section {
         position: relative;
@@ -261,7 +431,7 @@
         backdrop-filter: blur(10px);
         font-size: 1rem;
         font-weight: 500;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Space Mono', monospace;
         text-decoration: none;
         transition: all 0.3s;
         cursor: pointer;
@@ -340,7 +510,7 @@
 
     <!-- Header -->
     <header class="header">
-      <div class="container-xxl">
+      <div class="container-xxl d-flex align-items-center justify-content-between">
         <div class="logo-container">
           <div class="logo-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -356,10 +526,43 @@
               <path d="M9 20v2"/>
             </svg>
           </div>
-          <span class="logo-text">Ocean1 HPC</span>
+          <span class="logo-text">Ocean1HPC</span>
         </div>
+
+        <!-- Desktop Navigation Links -->
+        <div class="nav-links">
+          <a class="nav-link" onclick="showModal()">White Paper</a>
+          <a class="nav-link" onclick="showModal()">Careers</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="menu-button" onclick="toggleSidebar()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">Menu</span>
+        <button class="close-button" onclick="toggleSidebar()">&times;</button>
+      </div>
+      <div class="sidebar-links">
+        <a class="sidebar-link" onclick="showModal(); toggleSidebar();">White Paper</a>
+        <a class="sidebar-link" onclick="showModal(); toggleSidebar();">Careers</a>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal" onclick="closeModal(event)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <p class="modal-text">Not available at the moment, check back later!</p>
+        <button class="modal-button" onclick="closeModal()">Close</button>
+      </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -410,6 +613,24 @@
           document.getElementById('loadingScreen').classList.add('hidden');
         }, 2000);
       });
+
+      // Toggle mobile sidebar
+      function toggleSidebar() {
+        const sidebar = document.getElementById('mobileSidebar');
+        sidebar.classList.toggle('active');
+      }
+
+      // Show modal
+      function showModal() {
+        const modal = document.getElementById('modal');
+        modal.classList.add('active');
+      }
+
+      // Close modal
+      function closeModal(event) {
+        const modal = document.getElementById('modal');
+        modal.classList.remove('active');
+      }
     </script>
   </body>
 </html>
