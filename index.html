@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ocean1 HPC - Frontier Computing for Minimal Resources</title>
-    <meta name="description" content="High-performance computing lab building powerful efficient systems for edge applications" />
+    <title>Ocean1 HPC - AI-Powered Computing for the Edge</title>
+    <meta name="description" content="Bringing AI-driven high-performance computing to where it matters most" />
     <meta name="author" content="Ocean1 HPC" />
 
-    <meta property="og:title" content="Ocean1 HPC - Frontier Computing for Minimal Resources" />
-    <meta property="og:description" content="High-performance computing lab building powerful efficient systems for edge applications" />
+    <meta property="og:title" content="Ocean1 HPC - AI-Powered Computing for the Edge" />
+    <meta property="og:description" content="Bringing AI-driven high-performance computing to where it matters most" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
@@ -32,7 +32,7 @@
         --color-secondary: #3d4f5f;
         --color-muted: #8a9bb0;
         --color-accent: #e5f1f8;
-        --color-hero-bg: rgba(61, 79, 95, 0.9);
+        --color-hero-bg: rgba(15, 30, 45, 0.75);
       }
 
       * {
@@ -47,6 +47,79 @@
         color: var(--color-foreground);
         font-weight: 400;
         line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Loading Animation */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #0a1929 0%, #1a3a52 50%, #0a1929 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+
+      .loading-screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .wave-loader {
+        position: relative;
+        width: 200px;
+        height: 100px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .wave-bar {
+        width: 20px;
+        background: linear-gradient(180deg, #0891c7 0%, #3b82f6 100%);
+        border-radius: 10px;
+        animation: wave 1.2s ease-in-out infinite;
+      }
+
+      .wave-bar:nth-child(1) { animation-delay: 0s; }
+      .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+      .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+      .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+      .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+      .wave-bar:nth-child(6) { animation-delay: 0.5s; }
+
+      @keyframes wave {
+        0%, 100% {
+          height: 20px;
+        }
+        50% {
+          height: 80px;
+        }
+      }
+
+      .loading-text {
+        margin-top: 2rem;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.25rem;
+        color: #e5f1f8;
+        letter-spacing: 2px;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
       }
 
       /* Header Styles - Mobile First */
@@ -125,15 +198,17 @@
         overflow: hidden;
       }
 
-      .hero-background {
+      .hero-video {
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-image: url('./assets/hero-background.jpg');
-        background-size: cover;
-        background-position: center;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        z-index: 0;
       }
 
       .hero-overlay {
@@ -142,7 +217,11 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(to bottom, var(--color-hero-bg), rgba(61, 79, 95, 0.7), var(--color-hero-bg));
+        background: linear-gradient(to bottom, 
+          rgba(15, 30, 45, 0.85) 0%, 
+          rgba(15, 30, 45, 0.75) 50%, 
+          rgba(15, 30, 45, 0.85) 100%);
+        z-index: 1;
       }
 
       .hero-planet {
@@ -158,6 +237,7 @@
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center right;
+        z-index: 2;
       }
 
       .hero-content {
@@ -282,6 +362,19 @@
   </head>
 
   <body>
+    <!-- Loading Animation -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="wave-loader">
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+      </div>
+      <div class="loading-text">Loading Ocean1 HPC...</div>
+    </div>
+
     <!-- Header -->
     <header class="header">
       <div class="container-xxl d-flex align-items-center justify-content-between">
@@ -308,10 +401,13 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-      <!-- Background Image -->
-      <div class="hero-background">
-        <div class="hero-overlay"></div>
-      </div>
+      <!-- Background Video -->
+      <video autoplay muted loop playsinline class="hero-video" id="heroVideo">
+        <source src="https://cdn.pixabay.com/video/2022/10/04/133508-756991153_large.mp4" type="video/mp4">
+      </video>
+
+      <!-- Dark Overlay -->
+      <div class="hero-overlay"></div>
 
       <!-- Planet Decoration -->
       <div class="hero-planet d-none d-lg-block"></div>
@@ -320,13 +416,13 @@
       <div class="hero-content">
         <div style="max-width: 48rem;">
           <h1 class="hero-title">
-            Frontier Computing for<br>
-            Minimal Resources
+            AI-Driven Computing<br>
+            Where It Matters Most
           </h1>
           <p class="hero-description">
-            We are a high-performance computing lab building powerful efficient systems for edge applications.
+            We're a team of innovators bringing AI-powered high-performance computing to the edge. Our mission is to make cutting-edge technology accessible, efficient, and sustainable for real-world applications.
           </p>
-          <a href="#contact" class="hero-button">
+          <a href="mailto:info@ocean1hpc.com" class="hero-button">
             Get in touch
             <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14"/>
@@ -338,8 +434,8 @@
 
       <!-- Footer -->
       <div class="hero-footer">
-        <div class="container-xxl d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-          <p class="footer-text">Email: info@ocean1hpc.com</p>
+        <div class="container-xxl text-center">
+          <p class="footer-text mb-2">Email: info@ocean1hpc.com</p>
           <p class="footer-text">© 2025 Ocean1 HPC. All rights reserved.</p>
         </div>
       </div>
@@ -347,5 +443,14 @@
 
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- Loading Animation Script -->
+    <script>
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.getElementById('loadingScreen').classList.add('hidden');
+        }, 2000);
+      });
+    </script>
   </body>
 </html>
