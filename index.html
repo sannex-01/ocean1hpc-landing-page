@@ -259,12 +259,17 @@
         }
       }
 
-      /* Mobile: same size as menu button */
+      /* Mobile: smaller size, closer to menu button */
       @media (max-width: 767px) {
         .audio-button {
-          width: 40px;
-          height: 40px;
-          margin-right: 0.5rem;
+          width: 36px;
+          height: 36px;
+          margin-right: 0.75rem;
+        }
+        
+        .audio-button svg {
+          width: 18px;
+          height: 18px;
         }
       }
 
@@ -538,7 +543,7 @@
 
   <body>
     <!-- Background Audio -->
-    <audio id="backgroundAudio" loop>
+    <audio id="backgroundAudio" loop autoplay>
       <source src="https://cdn.pixabay.com/download/audio/2024/10/12/audio_7dd52a2e33.mp3" type="audio/mpeg">
     </audio>
 
@@ -676,11 +681,22 @@
       let audioPlaying = false;
       const audio = document.getElementById('backgroundAudio');
 
+      // Try to start audio immediately
+      audio.play().then(() => {
+        audioPlaying = true;
+        updateAudioIcon();
+      }).catch(() => {
+        // Browsers may block autoplay, will try again after loading animation
+        audioPlaying = false;
+      });
+
       window.addEventListener('load', function() {
         setTimeout(function() {
           document.getElementById('loadingScreen').classList.add('hidden');
-          // Auto-play audio after loading (with user interaction fallback)
-          playAudio();
+          // Try to auto-play audio after loading animation
+          if (!audioPlaying) {
+            playAudio();
+          }
         }, 2000);
       });
 
