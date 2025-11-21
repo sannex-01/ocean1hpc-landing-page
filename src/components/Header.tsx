@@ -2,12 +2,26 @@ import Logo from "./Logo";
 
 const Header = () => {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <header 
+      className="position-fixed top-0 start-0 end-0" 
+      style={{ 
+        zIndex: 50, 
+        padding: '1.5rem 3rem'
+      }}
+    >
+      <div className="container-xxl d-flex align-items-center justify-content-between">
         <Logo />
         <a 
           href="#careers" 
-          className="text-sm font-medium text-foreground hover:text-primary transition-colors uppercase tracking-wider"
+          className="text-decoration-none text-uppercase fw-medium"
+          style={{ 
+            fontSize: '0.875rem',
+            letterSpacing: '0.1em',
+            color: 'var(--color-foreground)',
+            transition: 'color 0.2s'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'}
+          onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-foreground)'}
         >
           Careers
         </a>

@@ -9,11 +9,25 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
+    <div 
+      className="d-flex align-items-center justify-content-center"
+      style={{ 
+        minHeight: '100vh',
+        backgroundColor: 'var(--color-muted)'
+      }}
+    >
       <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
+        <h1 className="mb-4 display-4 fw-bold">404</h1>
+        <p className="mb-4 fs-5" style={{ color: 'var(--color-foreground)' }}>
+          Oops! Page not found
+        </p>
+        <a 
+          href="/" 
+          className="text-decoration-underline"
+          style={{ color: 'var(--color-primary)' }}
+          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+        >
           Return to Home
         </a>
       </div>

@@ -1,23 +1,40 @@
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import heroBackground from "@/assets/hero-background.jpg";
 import planet from "@/assets/planet.png";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section 
+      className="position-relative d-flex align-items-center justify-content-center overflow-hidden"
+      style={{ minHeight: '100vh' }}
+    >
       {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroBackground})` }}
+        className="position-absolute top-0 start-0 bottom-0 end-0"
+        style={{ 
+          backgroundImage: `url(${heroBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/90 via-secondary/70 to-secondary/90" />
+        <div 
+          className="position-absolute top-0 start-0 bottom-0 end-0"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(61, 79, 95, 0.9), rgba(61, 79, 95, 0.7), rgba(61, 79, 95, 0.9))'
+          }}
+        />
       </div>
 
       {/* Planet Decoration */}
       <div 
-        className="absolute right-0 top-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-60 pointer-events-none hidden lg:block"
+        className="position-absolute d-none d-lg-block"
         style={{ 
+          right: 0,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          width: '800px',
+          height: '800px',
+          opacity: 0.6,
+          pointerEvents: 'none',
           backgroundImage: `url(${planet})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
@@ -26,32 +43,91 @@ const Hero = () => {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-24">
-        <div className="max-w-3xl">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-accent-foreground leading-tight font-mono">
+      <div 
+        className="position-relative container-xxl"
+        style={{ zIndex: 10, padding: '6rem 3rem' }}
+      >
+        <div style={{ maxWidth: '48rem' }}>
+          <h1 
+            className="fw-bold mb-4"
+            style={{ 
+              fontSize: 'clamp(3rem, 7vw, 5rem)',
+              lineHeight: 1.1,
+              color: '#e5f1f8',
+              fontFamily: 'var(--bs-font-monospace)'
+            }}
+          >
             Frontier Computing for
             <br />
             Minimal Resources
           </h1>
-          <p className="text-lg md:text-xl text-muted mb-8 max-w-2xl leading-relaxed">
+          <p 
+            className="mb-4"
+            style={{ 
+              fontSize: 'clamp(1.125rem, 2vw, 1.25rem)',
+              color: 'var(--color-muted)',
+              maxWidth: '42rem',
+              lineHeight: 1.6
+            }}
+          >
             We are a high-performance computing lab building powerful efficient systems for edge
             applications.
           </p>
-          <Button 
-            size="lg"
-            className="group bg-secondary-foreground/10 text-accent-foreground border border-muted/30 hover:bg-secondary-foreground/20 hover:border-muted/50 backdrop-blur-sm transition-all"
+          <button 
+            className="btn btn-lg d-inline-flex align-items-center gap-2 position-relative overflow-hidden"
+            style={{
+              backgroundColor: 'rgba(247, 250, 251, 0.1)',
+              color: '#e5f1f8',
+              border: '1px solid rgba(138, 155, 176, 0.3)',
+              backdropFilter: 'blur(10px)',
+              transition: 'all 0.3s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(247, 250, 251, 0.2)';
+              e.currentTarget.style.borderColor = 'rgba(138, 155, 176, 0.5)';
+              const arrow = e.currentTarget.querySelector('.arrow-icon');
+              if (arrow) (arrow as HTMLElement).style.transform = 'translateX(4px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(247, 250, 251, 0.1)';
+              e.currentTarget.style.borderColor = 'rgba(138, 155, 176, 0.3)';
+              const arrow = e.currentTarget.querySelector('.arrow-icon');
+              if (arrow) (arrow as HTMLElement).style.transform = 'translateX(0)';
+            }}
           >
             Get in touch
-            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
+            <svg 
+              className="arrow-icon"
+              xmlns="http://www.w3.org/2000/svg" 
+              width="16" 
+              height="16" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              style={{ transition: 'transform 0.3s' }}
+            >
+              <path d="M5 12h14"/>
+              <path d="m12 5 7 7-7 7"/>
+            </svg>
+          </button>
         </div>
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 px-6 md:px-12 py-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted">
-          <p>Email: info@ocean1hpc.com</p>
-          <p>© 2025 Ocean1 HPC. All rights reserved.</p>
+      <div 
+        className="position-absolute bottom-0 start-0 end-0"
+        style={{ zIndex: 10, padding: '2rem 3rem' }}
+      >
+        <div className="container-xxl d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+          <p className="mb-0" style={{ fontSize: '0.875rem', color: 'var(--color-muted)' }}>
+            Email: info@ocean1hpc.com
+          </p>
+          <p className="mb-0" style={{ fontSize: '0.875rem', color: 'var(--color-muted)' }}>
+            © 2025 Ocean1 HPC. All rights reserved.
+          </p>
         </div>
       </div>
     </section>
