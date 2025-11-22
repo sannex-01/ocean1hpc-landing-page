@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ocean1 HPC - AI-Powered Computing for the Edge</title>
+    <title>Ocean1HPC - AI-Powered Computing for the Edge</title>
     <meta name="description" content="Bringing AI-driven high-performance computing to where it matters most" />
-    <meta name="author" content="Ocean1 HPC" />
+    <meta name="author" content="Ocean1HPC" />
 
-    <meta property="og:title" content="Ocean1 HPC - AI-Powered Computing for the Edge" />
+    <meta property="og:title" content="Ocean1HPC - AI-Powered Computing for the Edge" />
     <meta property="og:description" content="Bringing AI-driven high-performance computing to where it matters most" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
@@ -259,17 +259,16 @@
         }
       }
 
-      /* Mobile: smaller size, closer to menu button */
+      /* Mobile: 20% smaller (32px instead of 40px), positioned at far right before menu */
       @media (max-width: 767px) {
         .audio-button {
-          width: 36px;
-          height: 36px;
-          margin-right: 0.75rem;
+          width: 32px;
+          height: 32px;
         }
         
         .audio-button svg {
-          width: 18px;
-          height: 18px;
+          width: 16px;
+          height: 16px;
         }
       }
 
@@ -557,7 +556,7 @@
         <div class="wave-bar"></div>
         <div class="wave-bar"></div>
       </div>
-      <div class="loading-text">Loading Ocean1 HPC...</div>
+      <div class="loading-text">Loading Ocean1HPC...</div>
     </div>
 
     <!-- Header -->
@@ -596,21 +595,23 @@
           </button>
         </div>
 
-        <!-- Audio Control Button (Mobile) -->
-        <button class="audio-button d-md-none" onclick="toggleAudio()" aria-label="Toggle audio">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" class="audio-wave-mobile"></path>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" class="audio-wave-mobile"></path>
-          </svg>
-        </button>
+        <!-- Audio Control Button (Mobile) - positioned at far right before menu -->
+        <div class="d-md-none d-flex align-items-center gap-2">
+          <button class="audio-button" onclick="toggleAudio()" aria-label="Toggle audio">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" class="audio-wave-mobile"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" class="audio-wave-mobile"></path>
+            </svg>
+          </button>
 
-        <!-- Mobile Menu Button -->
-        <button class="menu-button" onclick="toggleSidebar()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+          <!-- Mobile Menu Button -->
+          <button class="menu-button" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -668,7 +669,7 @@
       <div class="hero-footer">
         <div class="container-xxl text-center">
           <p class="footer-text mb-2">Email: info@ocean1hpc.com</p>
-          <p class="footer-text">© 2025 Ocean1 HPC. All rights reserved.</p>
+          <p class="footer-text">© 2025 Ocean1HPC. All rights reserved.</p>
         </div>
       </div>
     </section>
