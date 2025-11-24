@@ -1,73 +1,49 @@
-# Welcome to your Lovable project
+# Ocean1 HPC Landing Page
 
-## Project info
+A simple, standalone landing page for Ocean1 HPC built with Bootstrap 5.
 
-**URL**: https://lovable.dev/projects/6d650ec0-bdbc-4e3c-a217-b3c7deb74501
+## About
 
-## How can I edit this code?
+This is a single-page website showcasing Ocean1 HPC - a high-performance computing lab building powerful efficient systems for edge applications.
 
-There are several ways of editing your application.
+## Technology
 
-**Use Lovable**
+- **Bootstrap 5.3.3** - For responsive layout and styling
+- **Pure HTML/CSS** - No build tools or frameworks required
+- **Google Fonts** - Inter and Space Mono fonts
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6d650ec0-bdbc-4e3c-a217-b3c7deb74501) and start prompting.
+## Usage
 
-Changes made via Lovable will be committed automatically to this repo.
+Simply open `index.html` in any modern web browser. No build process or server required.
 
-**Use your preferred IDE**
+### Local Development
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+You can use any local web server to view the page. For example:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Using Python
+python -m http.server 8080
 
-Follow these steps:
+# Using Node.js http-server
+npx http-server -p 8080
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Or just open index.html directly in your browser
 ```
 
-**Edit a file directly in GitHub**
+## Structure
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+.
+├── index.html          # Main landing page
+└── assets/
+    ├── hero-background.jpg
+    └── planet.png
+```
 
-**Use GitHub Codespaces**
+## Features
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/6d650ec0-bdbc-4e3c-a217-b3c7deb74501) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- Fully responsive design
+- Bootstrap 5 components and utilities
+- Modern, clean aesthetic
+- Optimized images
+- SEO-friendly meta tags
